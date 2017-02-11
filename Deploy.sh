@@ -26,7 +26,7 @@ else
   ACTION=create
 fi
 
-kubectl $ACTION --namespace $NAMESPACE -f - <<END
+kubectl $ACTION -f - <<END
 apiVersion: v1
 kind: Secret
 type: kubernetes.io/opaque
@@ -64,4 +64,4 @@ END
 #
 
 export APP_NAME ENV_NAME CONFIG_NAME SECRET_NAME NAMESPACE IMAGE_NAME
-envsubst fluentd-cloudwatch-daemonset-template.yaml | kubectl appy -f -
+envsubst < fluentd-cloudwatch-daemonset-template.yaml | kubectl apply -f -
