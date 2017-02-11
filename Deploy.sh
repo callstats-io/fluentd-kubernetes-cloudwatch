@@ -14,7 +14,7 @@ set -e
 : ${CONFIG_NAME:=$APP_NAME}
 : ${ENV_NAME:=system}
 : ${NAMESPACE:=kube-system}
-: ${IMAGE_NAME:=whereisaaron/fluentd-kubernetes-cloudwatch:1.1.2}
+: ${IMAGE_NAME:=callstats/fluentd-kubernetes-cloudwatch:v1.1.2}
 
 #
 # Secret
