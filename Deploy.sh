@@ -15,6 +15,7 @@ set -e
 : ${ENV_NAME:=system}
 : ${NAMESPACE:=kube-system}
 : ${IMAGE_NAME:=callstats/fluentd-kubernetes-cloudwatch:v1.1.2}
+: ${CW_LOG_GROUP:=kubernetes-cluster}
 
 #
 # Secret
@@ -56,7 +57,7 @@ metadata:
     env: $ENV_NAME
 data:
   AWS_REGION: $AWS_DEFAULT_REGION
-  CW_LOG_GROUP: kubernetes-cluster
+  CW_LOG_GROUP: $CW_LOG_GROUP
 END
 
 #
