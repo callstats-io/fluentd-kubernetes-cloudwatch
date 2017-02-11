@@ -1,17 +1,29 @@
-# Fluentd image to send Kuberntes logs to CloudWatch
+# Fluentd image to send Kubernetes logs to CloudWatch
 
-## Quickstart
+Gratefully forked from https://github.com/callstats-io/fluentd-kubernetes-cloudwatch
+
+The changes are to make the deployment more automated and configurable.
+
+## Deployment
 
 1. Create AWS IAM user which has permission to store logs to CloudWatch
 
-2. Clone this repository
+2. Set environment variables for the AWS IAM user including region
 
-3. You may want to edit the ConfigMap to change the region and log group name
+```
+export AWS_ACCESS_KEY_ID=<your key>
+export AWS_SECRET_ACCESS_KEY=<your secret>
+export AWS_DEFAULT_REGION=<your region>
+```
 
-4. Run:
-```
-echo -n "accesskeyhere" > aws_access_key
-echo -n "secretkeyhere" > aws_secret_key
-kubectl create secret --namespace=kube-system generic fluentd-secrets --from-file=aws_access_key --from-file=aws_secret_key
-kubectl apply -f fluentd-cloudwatch-daemonset.yaml
-```
+3. Optionally set other environment variable to change resource names or labels
+
+- `NAMESPACE` defaults to 'kube-system'
+- `APP_NAME` defaults to 'fluentd-cloudwatch'
+- `SECRET_NAME` defaults to 'fluentd-cloudwatch'
+- `CONFIG_NAME` defaults to 'fluentd-cloudwatch'
+- `ENV_NAME` defaults to 'system'
+
+4. Run `Deploy.sh` to create the Secret, ConfigMap, and DaemonSet
+
+5. Run `Display.sh` to check everything is running
