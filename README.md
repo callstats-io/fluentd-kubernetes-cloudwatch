@@ -21,7 +21,7 @@ export LOGGING_AWS_REGION=<your region>
 
 4. Run `deploy.sh` to create the Secret, ConfigMap, and DaemonSet, setting the AWS IAM user and CloudWatch region environments variables if you did not export them in the previous step.
 ```
-LOGGING_AWS_ACCESS_KEY_ID=<your key> LOGGING_AWS_SECRET_ACCESS_KEY=<your secret> LOGGING_AWS_REGION=<your region> deploy.sh
+LOGGING_AWS_ACCESS_KEY_ID=<your key> LOGGING_AWS_SECRET_ACCESS_KEY=<your secret> LOGGING_AWS_REGION=<your region> ./deploy.sh
 ```
 
 5. Run `display.sh` to check everything is running
