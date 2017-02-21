@@ -12,7 +12,7 @@
 - `ENV_NAME` defaults to 'system'
 - `CW_LOG_GROUP` defaults to 'kubernetes-cluster'
 
-3. Set environment variables for the AWS IAM user and CloudWatch region or set them just when running `Deploy.sh` in the next step
+3. Set environment variables for the AWS IAM user and CloudWatch region or set them just when running `deploy.sh` in the next step
 ```
 export LOGGING_AWS_ACCESS_KEY_ID=<your key>
 export LOGGING_AWS_SECRET_ACCESS_KEY=<your secret>
