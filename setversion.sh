@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Update the container version tag in scripts and documentation 
+# Update the container version tag in scripts and documentation
 
 : ${1?Must supply a version number (e.g. $0 1.2.3)}
 
