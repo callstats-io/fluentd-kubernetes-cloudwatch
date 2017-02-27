@@ -1,20 +1,11 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: fluentd-cloudwatch-config
-  namespace: kube-system
-data:
-  aws_region: eu-west-1
-  log_group: kubernetes-cluster
-
----
-
 apiVersion: extensions/v1beta1
 kind: DaemonSet
 metadata:
-  name: fluentd-cloudwatch-v1
-  namespace: kube-system
+  name: $APP_NAME
+  namespace: $NAMESPACE
   labels:
+    app: $APP_NAME
+    env: $ENV_NAME
     k8s-app: fluentd-logging
     version: v1
     kubernetes.io/cluster-service: "true"
@@ -22,13 +13,15 @@ spec:
   template:
     metadata:
       labels:
+        app: $APP_NAME
+        env: $ENV_NAME
         k8s-app: fluentd-logging
         version: v1
         kubernetes.io/cluster-service: "true"
     spec:
       containers:
-      - name: fluentd-cloudwatch
-        image: callstats/fluentd-kubernetes-cloudwatch:v1.0.1
+      - name: $APP_NAME
+        image: $IMAGE_NAME
         imagePullPolicy: Always
         resources:
           limits:
@@ -40,23 +33,23 @@ spec:
           - name: AWS_ACCESS_KEY_ID
             valueFrom:
               secretKeyRef:
-                name: fluentd-secrets
-                key: aws_access_key
+                name: $SECRET_NAME
+                key: AWS_ACCESS_KEY_ID
           - name: AWS_SECRET_ACCESS_KEY
             valueFrom:
               secretKeyRef:
-                name: fluentd-secrets
-                key: aws_secret_key
+                name: $SECRET_NAME
+                key: AWS_SECRET_ACCESS_KEY
           - name: AWS_REGION
             valueFrom:
               configMapKeyRef:
-                name: fluentd-cloudwatch-config
-                key: aws_region
+                name: $CONFIG_NAME
+                key: AWS_REGION
           - name: CW_LOG_GROUP
             valueFrom:
               configMapKeyRef:
-                name: fluentd-cloudwatch-config
-                key: log_group
+                name: $CONFIG_NAME
+                key: CW_LOG_GROUP
         volumeMounts:
         - name: varlog
           mountPath: /var/log
