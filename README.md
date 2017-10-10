@@ -1,5 +1,10 @@
 # Fluentd image to send Kubernetes logs to CloudWatch
 
+
+## Requirements
+
+* envsubst: this is part of `gettext` package. If you're on macOS and using `brew`, you will have to force link `brew link --force gettext`
+
 ## Deployment
 
 1. Create AWS IAM user which has permission to store logs to CloudWatch
@@ -28,7 +33,7 @@ LOGGING_AWS_ACCESS_KEY_ID=<your key> LOGGING_AWS_SECRET_ACCESS_KEY=<your secret>
 
 ## Removal
 
-1. If you set custom values for the namespace or resource name environment variables, 
+1. If you set custom values for the namespace or resource name environment variables,
 ensure they are still set to your values (`NAMESPACE`,`APP_NAME`,`SECRET_NAME`,`CONFIG_NAME`)
 
 2. Run `delete.sh`

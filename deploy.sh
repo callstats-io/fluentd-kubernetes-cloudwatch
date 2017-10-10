@@ -14,7 +14,7 @@ set -e
 : ${CONFIG_NAME:=$APP_NAME}
 : ${ENV_NAME:=system}
 : ${NAMESPACE:=kube-system}
-: ${IMAGE_NAME:=callstats/fluentd-kubernetes-cloudwatch:v1.1.2}
+: ${IMAGE_NAME:=callstats/fluentd-kubernetes-cloudwatch:latest}
 : ${CW_LOG_GROUP:=kubernetes-cluster}
 
 #
@@ -38,8 +38,8 @@ metadata:
     app: $APP_NAME
     env: $ENV_NAME
 data:
-  AWS_ACCESS_KEY_ID: $(echo -n "${LOGGING_AWS_ACCESS_KEY_ID}" | base64 -w 0)
-  AWS_SECRET_ACCESS_KEY: $(echo -n "${LOGGING_AWS_SECRET_ACCESS_KEY}" | base64 -w 0)
+  AWS_ACCESS_KEY_ID: $(echo -n "${LOGGING_AWS_ACCESS_KEY_ID}" | base64)
+  AWS_SECRET_ACCESS_KEY: $(echo -n "${LOGGING_AWS_SECRET_ACCESS_KEY}" | base64)
 END
 
 #
